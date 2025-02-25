@@ -75,10 +75,11 @@ float32_t
     signB = signF32UI( uiB );
     expB  = expF32UI( uiB );
     sigB  = fracF32UI( uiB );
-    signC = signF32UI( uiC ) ^ (op == softfloat_mulAdd_subC);
+    signC = signF32UI( uiC ) ^ !!( op & softfloat_mulAdd_subC );
     expC  = expF32UI( uiC );
     sigC  = fracF32UI( uiC );
-    signProd = signA ^ signB ^ (op == softfloat_mulAdd_subProd);
+    uiC   = packToF32UI( signC, expC, sigC );
+    signProd = signA ^ signB ^ !!( op & softfloat_mulAdd_subProd );
     /*------------------------------------------------------------------------
     *------------------------------------------------------------------------*/
     if ( expA == 0xFF ) {

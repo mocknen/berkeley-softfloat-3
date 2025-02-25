@@ -58,3 +58,60 @@ float32_t f32_mulAdd( float32_t a, float32_t b, float32_t c )
 
 }
 
+float32_t f32_mulSub( float32_t a, float32_t b, float32_t c )
+{
+    union ui32_f32 uA;
+    uint_fast32_t uiA;
+    union ui32_f32 uB;
+    uint_fast32_t uiB;
+    union ui32_f32 uC;
+    uint_fast32_t uiC;
+
+    uA.f = a;
+    uiA = uA.ui;
+    uB.f = b;
+    uiB = uB.ui;
+    uC.f = c;
+    uiC = uC.ui;
+    return softfloat_mulAddF32( uiA, uiB, uiC, softfloat_mulAdd_subC );
+
+}
+
+float32_t f32_nMulAdd( float32_t a, float32_t b, float32_t c )
+{
+    union ui32_f32 uA;
+    uint_fast32_t uiA;
+    union ui32_f32 uB;
+    uint_fast32_t uiB;
+    union ui32_f32 uC;
+    uint_fast32_t uiC;
+
+    uA.f = a;
+    uiA = uA.ui;
+    uB.f = b;
+    uiB = uB.ui;
+    uC.f = c;
+    uiC = uC.ui;
+    return softfloat_mulAddF32( uiA, uiB, uiC, softfloat_mulAdd_subC |
+                                               softfloat_mulAdd_subProd );
+
+}
+
+float32_t f32_nMulSub( float32_t a, float32_t b, float32_t c )
+{
+    union ui32_f32 uA;
+    uint_fast32_t uiA;
+    union ui32_f32 uB;
+    uint_fast32_t uiB;
+    union ui32_f32 uC;
+    uint_fast32_t uiC;
+
+    uA.f = a;
+    uiA = uA.ui;
+    uB.f = b;
+    uiB = uB.ui;
+    uC.f = c;
+    uiC = uC.ui;
+    return softfloat_mulAddF32( uiA, uiB, uiC, softfloat_mulAdd_subProd );
+
+}
